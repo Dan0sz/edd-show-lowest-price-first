@@ -25,13 +25,13 @@ jobs:
         run: |
           rsync -rc --exclude-from="$GITHUB_WORKSPACE/.distignore" "$GITHUB_WORKSPACE/" release/ --delete --delete-excluded
           cd "${GITHUB_WORKSPACE}/release" || exit
-          zip -r "${GITHUB_WORKSPACE}/easy-moneybird-edd.zip" .
+          zip -r "${GITHUB_WORKSPACE}/edd-lowest-price-first.zip" .
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ${{github.workspace}}/easy-moneybird-edd.zip
-          asset_name: easy-moneybird-edd.zip
+          asset_path: ${{github.workspace}}/edd-lowest-price-first.zip
+          asset_name: edd-lowest-price-first.zip
           asset_content_type: application/zip

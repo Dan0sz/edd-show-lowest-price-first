@@ -6,10 +6,11 @@ on:
 
 jobs:
   build:
-    name: Build Plugin Artifact
+    name: Build plugin asset
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
       - uses: actions/checkout@v2
 
       - name: Install composer dependencies
@@ -26,6 +27,7 @@ jobs:
           rsync -rc --exclude-from="$GITHUB_WORKSPACE/.distignore" "$GITHUB_WORKSPACE/" release/ --delete --delete-excluded
           cd "${GITHUB_WORKSPACE}/release" || exit
           zip -r "${GITHUB_WORKSPACE}/edd-lowest-price-first.zip" .
+
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
         env:
